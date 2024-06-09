@@ -10,8 +10,6 @@ dotenv.config({ path: './src/.env' });
 const app=express();
 const mongoose= require("mongoose");
 
-console.log('SECRET_KEY:', process.env.SECRET_KEY);
-
 app.use(express.json())
 app.use(cors());
 app.use("/user",userRouter)
