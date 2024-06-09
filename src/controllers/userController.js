@@ -1,7 +1,7 @@
 const userModel = require("../models/user");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
-const SECRET_KEY = "NOTESAPLI"
+const SECRET_KEY = process.env.SECRET_KEY || "NOTESAPI";
 
 
 const signup = async (req,res)=>{
@@ -23,6 +23,7 @@ const signup = async (req,res)=>{
                 username: username
 
             });
+            console.log(SECRET_KEY);
             const token = jwt.sign({email : result.email, id : result._id},SECRET_KEY);
             res.status(201).json({user: result, token: token});
 
@@ -30,6 +31,7 @@ const signup = async (req,res)=>{
             
     }catch(error)
     {
+        console.log(error);
         res.status(500).json({message: "Something went wrong"});
     }
 
